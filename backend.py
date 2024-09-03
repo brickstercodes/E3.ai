@@ -2,7 +2,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List
-
 from llama_index.core import VectorStoreIndex, Settings
 from llama_index.llms.together import TogetherLLM
 from llama_index.core.llms import ChatMessage, MessageRole
@@ -68,6 +67,11 @@ async def chat(request: ChatRequest):
         character_creation_template.format(question=request.message, history=request.history)
     )
     return ChatResponse(response=response.text)
+
+# Add this root route to handle GET requests to "/"
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the AI Chatbot API"}
 
 # This is for local testing
 if __name__ == "__main__":
