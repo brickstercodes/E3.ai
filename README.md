@@ -24,4 +24,4 @@ To run this project locally:
 
 ## Note
 
-Make sure to keep your API keys and other sensitive information secure. Do not commit them to the repository.
+Make sure to keep your API keys and other sensitive information secure. Generate your own.
