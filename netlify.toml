@@ -1,4 +1,0 @@
-[[redirects]]
-from = "/api/*"
-to = "/api/:splat"
-status = 200
