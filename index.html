@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Enact & Engage</title>
+    <style>
+      #chatResponse {
+        white-space: pre-wrap;
+        word-wrap: break-word;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="chatForm">
+      <input type="text" id="userInput" placeholder="Ask the chatbot..." />
+      <button type="submit">Send</button>
+    </form>
+    <div id="chatResponse"></div>
+
+    <script>
+      const chatForm = document.getElementById("chatForm");
+      const userInput = document.getElementById("userInput");
+      const chatResponse = document.getElementById("chatResponse");
+      let chatHistory = "";
+
+      chatForm.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        const message = userInput.value;
+        chatResponse.innerText += `You: ${message}\n`;
+        userInput.value = "";
+
+        try {
+          const response = await fetch("/api/chat", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ message, history: chatHistory }),
+          });
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const data = await response.json();
+          chatResponse.innerText += `Character: ${data.response}\n\n`;
+          chatHistory += `User: ${message}\nCharacter: ${data.response}\n`;
+        } catch (error) {
+          console.error("Error:", error);
+          chatResponse.innerText += `Error: ${error.message}\n`;
+        }
+      });
+    </script>
+  </body>
+</html>
