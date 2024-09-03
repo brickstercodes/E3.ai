@@ -16,10 +16,10 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
+api_keyy = os.getenv("THE_API_KEY")
 Settings.llm = TogetherLLM(
     model="meta-llama/Meta-Llama-3-70B-Instruct-Turbo", 
-    api_key="THE_API_KEY"
+    api_key=api_keyy
 )
 
 character_creation_msgs = [
