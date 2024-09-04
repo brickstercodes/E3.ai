@@ -69,10 +69,15 @@ async def chat(request: ChatRequest):
     )
     return ChatResponse(response=response.text)
 
+@app.get("/status/")
+def status():
+    return {"status": "ok"}
+
 # Add this root route to handle GET requests to "/"
 @app.get("/")
 async def read_root():
     return {"message": "Welcome to the AI Chatbot API"}
+
 
 # This is for local testing
 if __name__ == "__main__":
