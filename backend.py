@@ -1,4 +1,5 @@
 import os
+import requests
 from fastapi import FastAPI, WebSocket
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -6,6 +7,8 @@ from typing import List
 import asyncio
 import json
 import random
+from PIL import Image
+from io import BytesIO
 
 from llama_index.core import VectorStoreIndex, Settings
 from llama_index.llms.together import TogetherLLM
@@ -30,7 +33,11 @@ Settings.llm = TogetherLLM(
     api_key=api_keyy
 )
 
-# Define the chat prompt template with edge case handling and more structured educational flow
+# Google Custom Search API configuration
+google_api_key = os.getenv("GOOGLE_API_KEY")
+cse_id = os.getenv("GOOGLE_CSE_ID")
+
+# Character creation template
 character_creation_msgs = [
     ChatMessage(
         role=MessageRole.SYSTEM,
@@ -84,6 +91,7 @@ character_creation_msgs = [
         ),
     ),
 ]
+
 character_creation_template = ChatPromptTemplate(character_creation_msgs)
 
 class ChatRequest(BaseModel):
@@ -92,6 +100,27 @@ class ChatRequest(BaseModel):
 
 class ChatResponse(BaseModel):
     response: str
+
+def generate_image(character=None, topic=None, era=None):
+    if character:
+        query = f"historical portrait of {character}"
+    elif topic:
+        query = f"historical image of {topic}"
+    else:
+        return None
+    
+    if era:
+        query += f" in {era} era"
+    
+    url = f"https://www.googleapis.com/customsearch/v1?q={query}&cx={cse_id}&key={google_api_key}&searchType=image"
+    response = requests.get(url)
+    results = response.json()
+    
+    if 'items' in results and len(results['items']) > 0:
+        image_url = results['items'][0]['link']
+        return image_url
+    else:
+        return None
 
 @app.post("/api/chat", response_model=ChatResponse)
 async def chat(request: ChatRequest):
@@ -106,6 +135,10 @@ async def websocket_endpoint(websocket: WebSocket):
     chat_history = ""
     is_welcomed = False
     knowledge_imparted = 0
+    last_image_generated = 0
+    current_character = None
+    current_topic = None
+    current_era = None
 
     try:
         while True:
@@ -123,6 +156,14 @@ async def websocket_endpoint(websocket: WebSocket):
                 is_welcomed = True
                 continue
 
+            # Analyze user input for context
+            if "talk to" in user_input.lower():
+                current_character = user_input.split("talk to")[-1].strip()
+                current_topic = None
+            elif "learn about" in user_input.lower():
+                current_topic = user_input.split("learn about")[-1].strip()
+                current_character = None
+
             response = Settings.llm.stream_complete(character_creation_template.format(question=user_input, history=chat_history))
             full_response = ""
 
@@ -130,8 +171,22 @@ async def websocket_endpoint(websocket: WebSocket):
                 full_response += r.delta
                 await websocket.send_text(json.dumps({"delta": r.delta}))
 
+            # Extract era information from the response
+            era_keywords = ["ancient", "medieval", "renaissance", "modern", "contemporary"]
+            for keyword in era_keywords:
+                if keyword in full_response.lower():
+                    current_era = keyword
+                    break
+
             chat_history += f"\n\n**You:** {user_input}\n\n**AI:** {full_response}\n"
             knowledge_imparted += 1
+
+            # Generate image if appropriate
+            if knowledge_imparted - last_image_generated >= 3 and (current_character or current_topic):
+                image_url = generate_image(character=current_character, topic=current_topic, era=current_era)
+                if image_url:
+                    await websocket.send_text(json.dumps({"image": image_url}))
+                    last_image_generated = knowledge_imparted
 
             if knowledge_imparted >= 3:
                 knowledge_imparted = 0
