@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter Tight", "Urbanist";
+}
+
+body {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(37, 37, 37, 1) 100%
+  );
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 20px 50px;
+  background-color: #101010;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  padding-left: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  align-items: right;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 16 px;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: right;
+  border: 2px solid #22f02b;
+  border-radius: 30px;
+  padding: 2px;
+  background: black;
+}
+
+.auth-buttons .login-btn,
+.signup-btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.login-btn {
+  color: white;
+  background: black;
+}
+
+.signup-btn {
+  background: linear-gradient(to right, #22f02b, #f6f335);
+  color: black;
+  margin-left: -5px; /* Overlaps with the login button */
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+}
+
+main {
+  margin-top: 90px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 40px;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+}
+
+.text-section h1 {
+  font-family: "Inter Tight", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 72px;
+  color: #00ff85;
+}
+
+.contain_p {
+  display: block;
+  width: 679px;
+  padding-bottom: 40px;
+}
+
+.text-section p {
+  font-size: 1.2em;
+  margin: 10px;
+  margin-right: 10px;
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: 22px;
+  font-style: normal;
+}
+
+h1,
+.text-section .highlight {
+  background: linear-gradient(#22f02b, #f6f335);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 700;
+  font-optical-sizing: auto;
+  font-style: normal;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-section .cta-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 25px 128px;
+  background: linear-gradient(to right, #22f02b, #f6f335);
+  color: black;
+  border-radius: 86px;
+  text-decoration: none;
+  font-size: 32px;
+  display: inline-block;
+  justify-content: center;
+}
+
+.text-section .cta-btn:hover {
+  background: #e3e3e3;
+
+  transition: 0s ease-in-out;
+}
+
+.text-section .cta-btn .free {
+  display: inline-block;
+  opacity: 80%;
+  font-size: 32px;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>e3 - Chat with History's Greatest Minds</title>
+    <link rel="stylesheet" href="chat.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo"><img src="logo.svg" alt="" /></div>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+          <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="signup-btn">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="content-wrapper">
+        <div class="input-section">
+          <h1>
+            Hello
+            <p>Anugrah!</p>
+          </h1>
+          <h2>Let's Learn from the Legends!</h2>
+          <div class="option1">
+            What were Cleopatra's relationships with Julius Caesar and Mark
+            Antony?
+          </div>
+          <div id="option-wrapper">
+            <div class="option2">
+              Can you explain the theory of relativity in simple terms?
+            </div>
+            <div class="option3">I would like to talk to sir Issac Newton</div>
+          </div>
+          <form id="chatForm">
+            <div class="chat">
+              <div class="gradientinput">
+                <input
+                  type="text"
+                  id="userInput"
+                  placeholder="Start a conversation"
+                />
+              </div>
+              <div class="floater-icon">
+                <button type="submit">
+                  <i class="fa-solid fa-paper-plane"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="chat-section">
+          <div id="chatResponse"></div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+
+<script
+  src="https://kit.fontawesome.com/3a80d61288.js"
+  crossorigin="anonymous"
+></script>

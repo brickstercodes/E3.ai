@@ -1,0 +1,274 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(37, 37, 37, 1) 100%
+  );
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 20px 50px;
+  background-color: #101010;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  padding-left: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  align-items: right;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 16 px;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: right;
+  border: 2px solid #22f02b;
+  border-radius: 30px;
+  padding: 2px;
+  background: black;
+}
+
+.auth-buttons .login-btn,
+.signup-btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.login-btn {
+  color: white;
+  background: black;
+}
+
+.signup-btn {
+  background: linear-gradient(to right, #22f02b, #f6f335);
+  color: black;
+  margin-left: -5px; /* Overlaps with the login button */
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+}
+
+main {
+  margin-top: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 40px;
+}
+
+.content-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+}
+
+.input-section {
+  width: 679px;
+}
+
+.chat-section {
+  width: 715px;
+}
+
+h1,
+h2 {
+  font-size: 52px;
+}
+
+h1,
+.text-section .highlight {
+  background: linear-gradient(#22f02b, #f6f335);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Inter Tight", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+}
+
+h1 p {
+  font-family: "Inter Tight", sans-serif;
+  font-weight: bold;
+  display: inline;
+}
+
+h2 {
+  color: aliceblue;
+  font-family: "Inter Tight", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-style: normal;
+  margin-bottom: 36px;
+}
+#option-wrapper {
+  margin: 1rem;
+  padding: 1rem 2rem;
+  padding-left: 0;
+  text-align: center;
+  width: 677px;
+  height: 10px;
+  display: inline;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+}
+.option1 {
+  width: 677px;
+  height: 4em;
+  text-align: center;
+  padding: 20px 36px;
+  margin: 0;
+  margin-bottom: 36px;
+}
+
+.option2 {
+  width: 300px;
+  padding: 0px 30px;
+  display: inline-block;
+  padding: 1rem 1rem;
+  vertical-align: auto;
+  margin-right: 32px;
+}
+
+.option3 {
+  width: 278px;
+  padding: 0px 30px;
+  display: inline-block;
+  padding: 1rem 1rem;
+  vertical-align: auto;
+  margin-bottom: 36px;
+}
+
+.option1,
+.option2,
+.option3 {
+  padding: auto;
+  color: black;
+  background: linear-gradient(to right, #22f02b, #f6f335);
+  border-radius: 15px;
+  font-family: "Urbanist", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300;
+  font-size: 22px;
+  font-style: normal;
+  text-align: center;
+}
+
+#userInput {
+  width: 600px;
+  padding: 15px;
+  padding: 20px 10px;
+  border-radius: 30px;
+  font-size: 22.52px;
+  height: 67.56px;
+  background-color: black;
+  color: white;
+  font-family: "Urbanist", sans-serif;
+}
+
+.chat {
+  padding: 0;
+  float: right;
+}
+
+.chat .floater-icon {
+  float: right;
+  height: 67.56px;
+}
+
+.gradientinput {
+  float: left;
+  background-image: linear-gradient(to right, #22f02b, #f6f335);
+  border-radius: 30px;
+  width: 602px;
+  padding: 2px 1px;
+}
+
+.chat input {
+  padding-right: 30px;
+}
+
+#userInput::placeholder {
+  color: #bdbdbd;
+}
+
+/* Style the send button */
+#chatForm button {
+  width: 62.56px;
+  height: 62.56px;
+  border-radius: 100%;
+  background-image: linear-gradient(to right, #22f02b, #f6f335);
+  margin-left: 30%;
+  margin-top: 10%;
+}
+
+#chatResponse {
+  position: relative; /* Ensure proper positioning */
+  background: black; /* Apply the linear gradient background */
+  border-radius: 33px;
+  width: 100%;
+  height: 620px;
+  padding: 15px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: #b3b3b3;
+  font-size: 16px;
+  box-shadow: 0px 0px 10px rgba(162, 255, 0, 0.5);
+  margin-left: 90px;
+}
+
+i {
+  font-size: 2em;
+}
+
+/* Add a shadow effect using pseudo-element */
+#chatResponse::before {
+  content: "";
+  position: absolute;
+  top: -15px;
+  left: -15px;
+  right: -15px;
+  bottom: -15px;
+  background: linear-gradient(to right, #22f02b, #f6f335);
+  filter: blur(15px);
+  z-index: -1;
+  border-radius: 33px; /* Match the border-radius of #chatResponse */
+}

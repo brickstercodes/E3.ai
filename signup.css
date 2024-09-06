@@ -1,0 +1,237 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter Tight", "Urbanist";
+}
+
+body {
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(37, 37, 37, 1) 100%
+  );
+  color: white;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 20px 50px;
+  background-color: #101010;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: 600;
+  padding-left: 40px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 30px;
+  list-style: none;
+  align-items: right;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-weight: 600;
+  font-size: 16 px;
+}
+
+.auth-buttons {
+  display: flex;
+  align-items: right;
+  border: 2px solid #22f02b;
+  border-radius: 30px;
+  padding: 2px;
+  background: black;
+}
+
+.auth-buttons .login-btn,
+.signup-btn {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: none;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: bold;
+}
+
+.login-btn {
+  color: white;
+  background: black;
+}
+
+.signup-btn {
+  background: linear-gradient(to right, #22f02b, #f6f335);
+  color: black;
+  margin-left: -5px; /* Overlaps with the login button */
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding-right: 40px;
+}
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  margin-bottom: 0;
+  height: auto;
+}
+
+.login-box {
+  background-color: #151515;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
+  width: 600px;
+}
+
+.login-title {
+  font-size: 3.2em;
+  color: #22f02b;
+  font-weight: 400;
+  font-family: "Urbanist", sans-serif;
+}
+
+.login-subtitle {
+  margin: 15px 0 25px;
+  font-size: 1.3rem;
+  color: #bdbdbd;
+  font-weight: 300;
+}
+
+.form-group {
+  margin-bottom: 25px;
+  font-weight: 300;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  color: #bdbdbd;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #bdbdbd;
+  background-color: #1a1a1a;
+  color: white;
+  font-size: 1.1rem;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 15px;
+  border-radius: 5px;
+  background: linear-gradient(to right, #22f02b, #f6f335);
+  color: black;
+  border: none;
+  font-size: 1.32em;
+  cursor: pointer;
+  font-weight: bolder;
+  margin-bottom: 20px;
+  font-family: "Urbanist", sans-serif;
+  word-spacing: 1px;
+}
+.btn-login:hover {
+  background: rgb(225, 54, 54);
+}
+
+.google-button {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #3c4043;
+  cursor: pointer;
+  width: 100%;
+  justify-content: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+.google-icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 12px;
+}
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-top: 16px;
+  color: #5f6368;
+  font-size: 15px;
+  padding: 10px;
+}
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #5f6368;
+}
+.divider::before {
+  margin-right: 10px;
+}
+.divider::after {
+  margin-left: 10px;
+}
+
+.google-icon {
+  width: 25px;
+  margin-right: 12px;
+}
+
+.new-user {
+  text-align: center;
+  margin-top: 10px;
+  color: #bdbdbd;
+}
+
+.new-user a {
+  color: #22f02b;
+  text-decoration: none;
+}
+
+.icon-placeholder {
+  flex: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.svg-placeholder {
+  width: 350px;
+  height: 350px;
+  border: 2px dashed #22f02b;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #22f02b;
+  font-size: 1.5rem;
+}
+.login-box .login-title {
+  background: linear-gradient(to right, #22f02b, #f6f335);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}

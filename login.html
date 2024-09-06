@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>e3 Login</title>
+    <link rel="stylesheet" href="login.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="navbar">
+        <div class="logo"><img src="logo.svg" alt="" /></div>
+        <div class="nav-right">
+          <ul class="nav-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+          <div class="auth-buttons">
+            <a href="login.html" class="login-btn">Login</a>
+            <a href="signup.html" class="signup-btn">Sign Up</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="container">
+        <div class="login-box">
+          <h1 class="login-title">Login</h1>
+          <p class="login-subtitle">Welcome back. We missed you!</p>
+          <form class="login-form">
+            <div class="form-group">
+              <label for="username">Username or Email address</label>
+              <input
+                type="text"
+                id="username"
+                placeholder="Username or you@example.com"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input type="password" id="password" placeholder="Password" />
+            </div>
+            <div class="forgot-password">
+              <a href="#">Forgot your Password?</a>
+            </div>
+            <button type="submit" class="btn-login">
+              <a href="chat.html">Login</a>
+            </button>
+          </form>
+          <p class="continue-with">or continue with</p>
+          <button class="btn-google">
+            <img
+              src="https://www.vectorlogo.zone/logos/google/google-icon.svg"
+              alt="Google Icon"
+              class="google-icon"
+            />
+            Login with Google
+          </button>
+          <p class="new-user">New here? <a href="#">Sign Up here.</a></p>
+        </div>
+
+        <div class="icon-placeholder">
+          <!-- Placeholder for SVG Icon -->
+          <img src="reading-a-book.svg" />
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
