@@ -1,5 +1,5 @@
 # E3.ai
-(Enact & Engage Chatbot)
+(Enact, Engage & Educate AI Chatbot)
 
 This project is a character-based chatbot using FastAPI for the backend and a simple HTML/JavaScript frontend.
 
