@@ -214,6 +214,10 @@ h2 {
   height: 67.56px;
 }
 
+.chat .floater-icon i {
+  font-size: large;
+}
+
 .gradientinput {
   float: left;
   background-image: linear-gradient(to right, #22f02b, #f6f335);
@@ -245,21 +249,18 @@ h2 {
   background: black; /* Apply the linear gradient background */
   border-radius: 33px;
   width: 100%;
-  height: 620px;
+  height: 620px; /* Keep the fixed height */
   padding: 15px;
   white-space: pre-wrap;
   word-wrap: break-word;
   color: #b3b3b3;
-  font-size: 16px;
+  font-size: 24px;
   box-shadow: 0px 0px 10px rgba(162, 255, 0, 0.5);
   margin-left: 90px;
+  overflow: auto; /* Add scrollbars if the content overflows */
 }
 
-i {
-  font-size: 2em;
-}
-
-/* Add a shadow effect using pseudo-element */
+/* Adjust the pseudo-element to match the border radius of #chatResponse */
 #chatResponse::before {
   content: "";
   position: absolute;
