@@ -2,3 +2,6 @@ fastapi
 uvicorn
 llama-index
 llama-index-llms-together
+torch
+flax
+tensorflow

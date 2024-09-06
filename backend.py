@@ -102,12 +102,31 @@ class ChatHistory(BaseModel):
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     chat_history = ""
+<<<<<<< HEAD
+=======
+    is_welcomed = False
+    knowledge_imparted = 0
+>>>>>>> 6dd8c428e90e7740de510913c4326be5f3514f41
     
     try:
         while True:
             data = await websocket.receive_text()
             user_input = json.loads(data)["message"]
             
+<<<<<<< HEAD
+=======
+            if not is_welcomed:
+                welcome_message = (
+                    "Welcome to e3.ai! Please choose one of the following options:\n"
+                    "1. Talk to a character\n"
+                    "2. Learn about a topic in history\n"
+                    "3. Fun facts on history"
+                )
+                await websocket.send_text(json.dumps({"delta": welcome_message}))
+                is_welcomed = True
+                continue
+            
+>>>>>>> 6dd8c428e90e7740de510913c4326be5f3514f41
             response = Settings.llm.stream_complete(character_creation_template.format(question=user_input, history=chat_history))
             full_response = ""
             
@@ -115,16 +134,65 @@ async def websocket_endpoint(websocket: WebSocket):
                 full_response += r.delta
                 await websocket.send_text(json.dumps({"delta": r.delta}))
             
+<<<<<<< HEAD
             chat_history += f"User: {user_input}\nCharacter: {full_response}\n"
             
             if "<DONE>" in full_response:
                 await websocket.send_text(json.dumps({"complete": True}))
+=======
+            chat_history += f"\n\n**You:** {user_input}\n\n**AI:** {full_response}\n"
+            knowledge_imparted += 1
+            
+            if knowledge_imparted >= 3:
+                knowledge_imparted = 0
+                satisfaction_message = (
+                    "You've learned a lot so far! Would you like to continue learning, or would you like to stop and take a quick quiz to test your knowledge?"
+                )
+                await websocket.send_text(json.dumps({"delta": satisfaction_message}))
+            
+            if user_input.strip().lower() in ["stop", "quiz", "take quiz"]:
+                quiz_questions = generate_quiz(chat_history)
+                for question in quiz_questions:
+                    await websocket.send_text(json.dumps({"delta": question["question"]}))
+                    await asyncio.sleep(1)
+                
+                score_message = "Great job! You've completed the quiz. Your results are being calculated..."
+                await websocket.send_text(json.dumps({"delta": score_message}))
+                
+                user_score = random.randint(4, 7)
+                results_message = f"You scored {user_score} out of 7! Keep up the great work in learning history!"
+                await websocket.send_text(json.dumps({"delta": results_message}))
+                break
+>>>>>>> 6dd8c428e90e7740de510913c4326be5f3514f41
     
     except Exception as e:
         print(f"Error: {str(e)}")
     finally:
         await websocket.close()
 
+<<<<<<< HEAD
+=======
+def generate_quiz(chat_history):
+    questions = [
+        {"question": "1. What year did the character arrive from? A) 1800 B) 1900 C) 2024 D) 2022"},
+        {"question": "2. Which civilization was discussed? A) Harappan B) Roman C) Greek D) Egyptian"},
+        {"question": "3. Who was mentioned as a key figure? A) Cleopatra B) Einstein C) Shakespeare D) All of the above"},
+        {"question": "4. What is the primary purpose of this AI? A) Entertainment B) Education C) Both D) None"},
+        {"question": "5. How does the character react to the current year? A) Surprised B) Indifferent C) Excited D) Disappointed"},
+        {"question": "6. What topic was discussed? A) Revolutions B) Inventions C) Colonization D) Fun Facts"},
+        {"question": "7. How does the AI ensure the conversation remains factual? A) By avoiding hallucinations B) By making things up C) By ignoring facts D) By changing topics"},
+    ]
+    return questions
+
+@app.get("/status/")
+def status():
+    return {"status": "ok"}
+
+@app.get("/")
+async def read_root():
+    return {"message": "Welcome to the AI Chatbot API"}
+
+>>>>>>> 6dd8c428e90e7740de510913c4326be5f3514f41
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
