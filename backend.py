@@ -11,7 +11,6 @@ from llama_index.core import VectorStoreIndex, Settings
 from llama_index.llms.together import TogetherLLM
 from llama_index.core.llms import ChatMessage, MessageRole
 from llama_index.core import ChatPromptTemplate
-from llama_index.core import ChatPromptTemplate, MessageRole, ChatMessage
 
 app = FastAPI()
 
@@ -31,13 +30,12 @@ Settings.llm = TogetherLLM(
     api_key=api_key
 )
 
-# Define the chat prompt template with edge case handling and more structured educational flow
-character_creation_template = ChatPromptTemplate(
-    message_templates=[
-        ChatMessage(
-            role=MessageRole.SYSTEM,
-            content=(
-        """You are an AI that fully embodies a character chosen by the user. You speak, think, and react as that character would in their time and context.
+# Define the chat prompt template
+character_creation_msgs = [
+    ChatMessage(
+        role=MessageRole.SYSTEM,
+        content=(
+            """You are an AI that fully embodies a character chosen by the user. You speak, think, and react as that character would in their time and context.
         You are an AI that fully embodies a character chosen by the user or acts as a narrator guiding the user through historical topics.
         Your primary purpose is to educate and impart accurate historical knowledge without hallucinations or fictionalization.
         Follow these steps:
@@ -83,19 +81,25 @@ character_creation_template = ChatPromptTemplate(
             b. If the user chooses to stop, generate a 7-question MCQ pop quiz based on the conversation.
             c. Provide the user with their results and offer an encouraging message regardless of their score.
         """
+        ),
     ),
-)
+    ChatMessage(
+        role=MessageRole.USER,
+        content=(
+            """
+            {question}
+            """
+        ),
+    ),
+]
+character_creation_template = ChatPromptTemplate(character_creation_msgs)
 
-class ChatRequest(BaseModel):
-    message: str
+class ChatMessage(BaseModel):
+    role: str
+    content: str
 
-class ChatResponse(BaseModel):
-    response: str
-
-@app.post("/chat")
-async def chat(request: ChatRequest):
-    response = Settings.llm.stream_complete(character_creation_template.format(question=request.message, history=""))
-    return ChatResponse(response=response.text)
+class ChatHistory(BaseModel):
+    messages: List[ChatMessage]
 
 @app.websocket("/ws/chat")
 async def websocket_endpoint(websocket: WebSocket):
@@ -103,12 +107,12 @@ async def websocket_endpoint(websocket: WebSocket):
     chat_history = ""
     is_welcomed = False
     knowledge_imparted = 0
-
+    
     try:
         while True:
             data = await websocket.receive_text()
             user_input = json.loads(data)["message"]
-
+            
             if not is_welcomed:
                 welcome_message = (
                     "Welcome to e3.ai! Please choose one of the following options:\n"
@@ -119,37 +123,38 @@ async def websocket_endpoint(websocket: WebSocket):
                 await websocket.send_text(json.dumps({"delta": welcome_message}))
                 is_welcomed = True
                 continue
-
+            
             response = Settings.llm.stream_complete(character_creation_template.format(question=user_input, history=chat_history))
             full_response = ""
-
+            
             for r in response:
                 full_response += r.delta
                 await websocket.send_text(json.dumps({"delta": r.delta}))
-
+            
             chat_history += f"\n\n**You:** {user_input}\n\n**AI:** {full_response}\n"
             knowledge_imparted += 1
-
+            
             if knowledge_imparted >= 3:
                 knowledge_imparted = 0
                 satisfaction_message = (
                     "You've learned a lot so far! Would you like to continue learning, or would you like to stop and take a quick quiz to test your knowledge?"
                 )
                 await websocket.send_text(json.dumps({"delta": satisfaction_message}))
-
+            
             if user_input.strip().lower() in ["stop", "quiz", "take quiz"]:
                 quiz_questions = generate_quiz(chat_history)
                 for question in quiz_questions:
                     await websocket.send_text(json.dumps({"delta": question["question"]}))
                     await asyncio.sleep(1)
-
+                
                 score_message = "Great job! You've completed the quiz. Your results are being calculated..."
                 await websocket.send_text(json.dumps({"delta": score_message}))
-
+                
                 user_score = random.randint(4, 7)
                 results_message = f"You scored {user_score} out of 7! Keep up the great work in learning history!"
                 await websocket.send_text(json.dumps({"delta": results_message}))
                 break
+    
     except Exception as e:
         print(f"Error: {str(e)}")
     finally:
@@ -175,7 +180,6 @@ def status():
 async def read_root():
     return {"message": "Welcome to the AI Chatbot API"}
 
-# This is for local testing
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
