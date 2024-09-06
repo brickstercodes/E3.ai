@@ -11,6 +11,7 @@ from llama_index.core import VectorStoreIndex, Settings
 from llama_index.llms.together import TogetherLLM
 from llama_index.core.llms import ChatMessage, MessageRole
 from llama_index.core import ChatPromptTemplate
+from llama_index.core import ChatPromptTemplate, MessageRole, ChatMessage
 
 app = FastAPI()
 
@@ -32,8 +33,10 @@ Settings.llm = TogetherLLM(
 
 # Define the chat prompt template with edge case handling and more structured educational flow
 character_creation_template = ChatPromptTemplate(
-    role=MessageRole.SYSTEM,
-    content=(
+    message_templates=[
+        ChatMessage(
+            role=MessageRole.SYSTEM,
+            content=(
         """You are an AI that fully embodies a character chosen by the user. You speak, think, and react as that character would in their time and context.
         You are an AI that fully embodies a character chosen by the user or acts as a narrator guiding the user through historical topics.
         Your primary purpose is to educate and impart accurate historical knowledge without hallucinations or fictionalization.
