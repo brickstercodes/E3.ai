@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from typing import List
 import asyncio
 import json
+import random
 
 from llama_index.core import VectorStoreIndex, Settings
 from llama_index.llms.together import TogetherLLM
@@ -12,10 +13,10 @@ from llama_index.core import ChatPromptTemplate
 
 app = FastAPI()
 
-# Add CORS middleware
+# Add CORS middleware with updated allow_origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Allows all origins
+    allow_origins=["https://e3-ai.vercel.app"],  # Only allow this specific origin
     allow_credentials=True,
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
@@ -102,19 +103,14 @@ class ChatHistory(BaseModel):
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     chat_history = ""
-<<<<<<< HEAD
-=======
     is_welcomed = False
     knowledge_imparted = 0
->>>>>>> 6dd8c428e90e7740de510913c4326be5f3514f41
     
     try:
         while True:
             data = await websocket.receive_text()
             user_input = json.loads(data)["message"]
             
-<<<<<<< HEAD
-=======
             if not is_welcomed:
                 welcome_message = (
                     "Welcome to e3.ai! Please choose one of the following options:\n"
@@ -126,7 +122,6 @@ async def websocket_endpoint(websocket: WebSocket):
                 is_welcomed = True
                 continue
             
->>>>>>> 6dd8c428e90e7740de510913c4326be5f3514f41
             response = Settings.llm.stream_complete(character_creation_template.format(question=user_input, history=chat_history))
             full_response = ""
             
@@ -134,12 +129,6 @@ async def websocket_endpoint(websocket: WebSocket):
                 full_response += r.delta
                 await websocket.send_text(json.dumps({"delta": r.delta}))
             
-<<<<<<< HEAD
-            chat_history += f"User: {user_input}\nCharacter: {full_response}\n"
-            
-            if "<DONE>" in full_response:
-                await websocket.send_text(json.dumps({"complete": True}))
-=======
             chat_history += f"\n\n**You:** {user_input}\n\n**AI:** {full_response}\n"
             knowledge_imparted += 1
             
@@ -163,15 +152,12 @@ async def websocket_endpoint(websocket: WebSocket):
                 results_message = f"You scored {user_score} out of 7! Keep up the great work in learning history!"
                 await websocket.send_text(json.dumps({"delta": results_message}))
                 break
->>>>>>> 6dd8c428e90e7740de510913c4326be5f3514f41
     
     except Exception as e:
         print(f"Error: {str(e)}")
     finally:
         await websocket.close()
 
-<<<<<<< HEAD
-=======
 def generate_quiz(chat_history):
     questions = [
         {"question": "1. What year did the character arrive from? A) 1800 B) 1900 C) 2024 D) 2022"},
@@ -192,7 +178,6 @@ def status():
 async def read_root():
     return {"message": "Welcome to the AI Chatbot API"}
 
->>>>>>> 6dd8c428e90e7740de510913c4326be5f3514f41
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
