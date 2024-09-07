@@ -25,7 +25,7 @@ app.add_middleware(
 # Initialize TogetherLLM
 Settings.llm = TogetherLLM(
     model="meta-llama/Meta-Llama-3-70B-Instruct-Turbo", 
-    api_key="6f81d9a1dc6d93c9105d5827b3fc9c9717d24e462fc04c74369d49ab85dc03b6"
+    api_key="THE_API_KEY"
 )
 
 # Define the chat prompt template
