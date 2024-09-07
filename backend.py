@@ -5,7 +5,7 @@ from typing import List
 import asyncio
 import json
 import random
-impoer os
+import os
 
 from llama_index.core import VectorStoreIndex, Settings
 from llama_index.llms.together import TogetherLLM
