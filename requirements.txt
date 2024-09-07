@@ -2,3 +2,5 @@ fastapi
 uvicorn
 llama-index
 llama-index-llms-together
+'uvicorn[standard]'
+torch
