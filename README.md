@@ -27,7 +27,3 @@ To run this project locally:
 1. Install dependencies: `pip install -r requirements.txt`
 2. Run the backend: `uvicorn backend:app --reload`
 3. Open `index.html` in a web browser
-
-## Note
-
-Make sure to keep your API keys and other sensitive information secure. Generate your own.
