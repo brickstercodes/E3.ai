@@ -5,6 +5,7 @@ from typing import List
 import asyncio
 import json
 import random
+impoer os
 
 from llama_index.core import VectorStoreIndex, Settings
 from llama_index.llms.together import TogetherLLM
@@ -25,7 +26,7 @@ app.add_middleware(
 # Initialize TogetherLLM
 Settings.llm = TogetherLLM(
     model="meta-llama/Meta-Llama-3-70B-Instruct-Turbo", 
-    api_key="THE_API_KEY"
+    api_key=os.environ.get("THE_API_KEY")
 )
 
 # Define the chat prompt template
@@ -180,4 +181,6 @@ async def read_root():
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    import os
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
