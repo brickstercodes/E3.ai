@@ -276,14 +276,14 @@ h2 {
 
 /* Style for user message */
 .user-message {
-  color: white; /* White text for user messages */
+  color: azure; /* White text for user messages */
   font-weight: bold; /* Optional: make it bold */
   margin-bottom: 10px; /* Add spacing between messages */
 }
 
 /* Style for AI response */
 .ai-response {
-  color: yellow; /* Yellow text for AI responses */
+  color: yellowgreen; /* Yellow text for AI responses */
   font-weight: normal;
   display: inline-block; /* Change to block display to handle text wrapping better */
   max-width: 80%; /* Limit the width to the chat box */
@@ -295,4 +295,9 @@ h2 {
 .error-message {
   color: red; /* Error messages in red */
   font-weight: bold;
+}
+
+a:hover,
+button:hover {
+  cursor: pointer;
 }
