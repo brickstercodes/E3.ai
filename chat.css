@@ -273,3 +273,26 @@ h2 {
   z-index: -1;
   border-radius: 33px; /* Match the border-radius of #chatResponse */
 }
+
+/* Style for user message */
+.user-message {
+  color: white; /* White text for user messages */
+  font-weight: bold; /* Optional: make it bold */
+  margin-bottom: 10px; /* Add spacing between messages */
+}
+
+/* Style for AI response */
+.ai-response {
+  color: yellow; /* Yellow text for AI responses */
+  font-weight: normal;
+  display: inline-block; /* Change to block display to handle text wrapping better */
+  max-width: 80%; /* Limit the width to the chat box */
+  word-wrap: break-word; /* Break long words */
+  overflow-wrap: break-word; /* Ensure long words wrap correctly */
+}
+
+/* Optional: Style for any error messages */
+.error-message {
+  color: red; /* Error messages in red */
+  font-weight: bold;
+}
