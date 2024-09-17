@@ -233,3 +233,8 @@ header {
   color: #22f02b;
   font-size: 1.5rem;
 }
+
+a:hover,
+button:hover {
+  cursor: pointer;
+}
