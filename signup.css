@@ -236,7 +236,6 @@ header {
   -webkit-text-fill-color: transparent;
 }
 
-a:hover,
-button:hover {
+a:hover{
   cursor: pointer;
 }
