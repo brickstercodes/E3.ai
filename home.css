@@ -169,3 +169,8 @@ h1,
   opacity: 80%;
   font-size: 32px;
 }
+
+a:hover,
+button:hover {
+  cursor: pointer;
+}
