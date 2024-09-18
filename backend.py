@@ -134,7 +134,7 @@ async def websocket_endpoint(websocket: WebSocket):
             chat_history += f"\n\n**You:** {user_input}\n\n**AI:** {full_response}\n"
             knowledge_imparted += 1
             
-            if knowledge_imparted >= 3:
+            if knowledge_imparted >= 7:
                 knowledge_imparted = 0
                 satisfaction_message = (
                     "You've learned a lot so far! Would you like to continue learning, or would you like to stop and take a quick quiz to test your knowledge?"
